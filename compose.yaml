@@ -4,7 +4,7 @@ services:
     container_name: mongodb
   catalogue: # even if this is placed first it craete mongodb first and then this
     image: catalogue:v1
-    container_name: catalogue:v1
+    container_name: catalogue
     depends_on:
     - mongodb
 
