@@ -8,13 +8,13 @@ services:
     depends_on:
     - mongodb
   redis:
-    image: redis:v1
+    image: redis:7
     container_name: redis
   mysql:
     image: mysql:v1
     container_name: mysql
   rabbitmq:
-    image: rabbitmq:v1
+    image: rabbitmq:3
     container_name: rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: roboshop
