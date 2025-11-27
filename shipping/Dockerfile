@@ -15,9 +15,6 @@
 
 FROM maven:3.9.11 AS build
 WORKDIR /opt/server
-RUN addgroup -S appgroup && \
-    adduser -S appuser -G appgroup && \
-    chown -R appuser:appgroup /opt/server
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean package && \
@@ -25,6 +22,9 @@ RUN mvn clean package && \
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /opt/server
+RUN addgroup -S appgroup && \
+    adduser -S appuser -G appgroup && \
+    chown -R appuser:appgroup /opt/server
 EXPOSE 8080
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
