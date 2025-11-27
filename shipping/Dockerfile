@@ -15,7 +15,7 @@
 
 FROM maven:3.9.11 AS build
 WORKDIR /opt/server
-RUN addgroup -S apgroup && \
+RUN addgroup -S appgroup && \
     adduser -S appuser -G appgroup && \
     chown -R appuser:appgroup /opt/server
 COPY pom.xml .
