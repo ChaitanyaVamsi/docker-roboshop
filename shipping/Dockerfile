@@ -12,7 +12,7 @@
 
 # unoptimized large image
 
-
+# ---------- Build Stage ----------
 FROM maven:3.9.11 AS build
 WORKDIR /opt/server
 COPY pom.xml .
@@ -20,6 +20,7 @@ COPY src ./src
 RUN mvn clean package && \
     mv target/shipping-1.0.jar shipping.jar
 
+# ---------- Runtime Stage ----------
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /opt/server
 RUN addgroup -S appgroup && \
@@ -28,6 +29,7 @@ RUN addgroup -S appgroup && \
 EXPOSE 8080
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
+# Copy built JAR from build stage
 COPY --from=build /opt/server/shipping.jar .
 USER appuser
 CMD ["java","-jar","shipping.jar"]
