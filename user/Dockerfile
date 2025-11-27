@@ -17,8 +17,10 @@ COPY . .
 
 FROM node:20.19.5-alpine3.22
 WORKDIR /opt/server
-RUN addgroup -S appgroup && adduser -S appuser && \
+RUN addgroup -S appgroup && \
+  adduser -S appuser -G appgroup && \
   chown -R appuser:appgroup /opt/server
+
 COPY --from=build /opt/server .
 USER appuser
 EXPOSE 8080

@@ -32,7 +32,8 @@ COPY . .
 FROM node:20.19.5-alpine3.22
 
 # Create non-root user # Change ownership && \ combines run instructions , reduces one extra layer
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup && \
+RUN addgroup -S appgroup && \
+  adduser -S appuser -G appgroup && \
   chown -R appuser:appgroup /opt/server
 
 # Set working directory
