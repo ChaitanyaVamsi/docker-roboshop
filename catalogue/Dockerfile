@@ -31,13 +31,13 @@ COPY . .
 # ---------- Runtime Stage ----------
 FROM node:20.19.5-alpine3.22
 
+# Set working directory
+WORKDIR /opt/server
+
 # Create non-root user # Change ownership && \ combines run instructions , reduces one extra layer
 RUN addgroup -S appgroup && \
   adduser -S appuser -G appgroup && \
   chown -R appuser:appgroup /opt/server
-
-# Set working directory
-WORKDIR /opt/server
 
 # Copy built app from previous stage
 COPY --from=build /opt/server .
