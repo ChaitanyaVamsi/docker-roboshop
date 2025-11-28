@@ -38,11 +38,10 @@ EXPOSE 8080
 WORKDIR /opt/server
 RUN apk add --no-cache pcre
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup && \
-    chown -R appuser:appgroup payment.ini *.py requirements.txt
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 COPY --from=builder /install /usr/local
 # Copy app files
-COPY --chown=roboshop:roboshop payment.ini *.py requirements.txt .
+COPY --chown=appuser:appgroup payment.ini *.py requirements.txt .
 ENV CART_HOST="cart" \
     CART_PORT="8080" \
     USER_HOST="user" \
