@@ -83,3 +83,7 @@ volumes:
   redis:
   mysql:
   rabbitmq:
+
+# docker compose build
+# docker compose push        - to push to docker hub
+# docker compose up -d      - to start
